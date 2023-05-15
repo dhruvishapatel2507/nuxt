@@ -6,8 +6,6 @@
         <v-form ref="form" v-model="valid" lazy-validation>
             <v-text-field v-model="data.name" :rules="rules.name" label="Name" @keypress="allowOnlyAlphabate()" outlined required></v-text-field>
 
-            <v-text-field v-model="data.email" :rules="rules.email" label="E-mail" outlined required></v-text-field>
-
             <v-text-field v-model="data.middlename" :rules="rules.middlename" @keypress="allowOnlyAlphabate()" label="MiddleName" outlined required></v-text-field>
 
             <v-text-field v-model="data.surname" :rules="rules.surname" @keypress="allowOnlyAlphabate()" label="SurName" outlined required></v-text-field>
@@ -74,7 +72,6 @@ export default {
             birth_date_model: false,
             data: {
                 name: '',
-                email: '',
                 middlename: '',
                 surname: '',
                 address_line1: '',
@@ -92,10 +89,6 @@ export default {
                 name: [
                     v => !!v || 'Name is required',
                     v => (v && v.length <= 10) || 'Name must be less than 10 characters',
-                ],
-                email: [
-                    v => !!v || 'E-mail is required',
-                    v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
                 ],
                 middlename: [
                     v => !!v || 'middlename is required'
@@ -146,7 +139,6 @@ export default {
     mounted() {
         this.$axios.get(`/api/users/${this.$route.query.id}`).then((r) => {
             this.data.name = r.data.name,
-                this.data.email = r.data.email,
                 this.data.middlename = r.data.middlename,
                 this.data.surname = r.data.surname,
                 this.data.address_line1 = r.data.address_line1,
@@ -183,7 +175,6 @@ export default {
             var hobbyStr = this.data.hobby.join(',');
             await this.$axios.put(`/api/users/${this.$route.query.id}`, {
                 name: this.data.name,
-                email: this.data.email,
                 password: this.data.password,
                 password_confirmation: this.data.password_confirmation,
                 middlename: this.data.middlename,

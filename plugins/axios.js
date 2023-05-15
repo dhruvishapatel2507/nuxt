@@ -7,8 +7,3 @@ export default ({ $axios}) => {
     config.headers.Authorization = `Bearer ${token}`;
   });
 }
-
-  
-    // config.headers['Authorization'] = `application/json`;
-    // config.headers['Accept'] = `application/json`;
-    // config.headers['Content-Type'] = `application/json`;

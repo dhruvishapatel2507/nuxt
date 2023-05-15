@@ -1,8 +1,8 @@
 <template>
 <div>
     <Navbar />
-    <h1 class="text-center text-h2 mt-5 mb-5">USER MANAGEMENT</h1>
     <div class="mb-10 mr-15">
+        <h1 class="text-center text-h2 mt-5 mb-5">USER MANAGEMENT</h1>
     <v-layout row wrap justify-end>
         <nuxt-link :to="`/addnewuser`">
         <v-btn tile color="success">

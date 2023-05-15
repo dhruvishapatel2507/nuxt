@@ -187,7 +187,7 @@ export default {
                         this.rules[value] = [...this.rules[value], v => !(v === this.oldData[value]) || errors[value][0]]
                         this.$refs.Form.validate()
                     })
-                    console.log(this.oldData);
+
                 }
             })
         },

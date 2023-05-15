@@ -6,8 +6,6 @@
         <v-form ref="form" v-model="valid" lazy-validation>
             <v-text-field v-model="me.name" :rules="rules.name" label="Name" @keypress="allowOnlyAlphabate()" outlined required></v-text-field>
 
-            <v-text-field v-model="me.email" :rules="rules.email" label="E-mail" outlined required></v-text-field>
-
             <v-text-field v-model="me.middlename" :rules="rules.middlename" @keypress="allowOnlyAlphabate()" label="MiddleName" outlined required></v-text-field>
 
             <v-text-field v-model="me.surname" :rules="rules.surname" @keypress="allowOnlyAlphabate()" label="SurName" outlined required></v-text-field>
@@ -78,10 +76,6 @@ export default {
                     v => !!v || 'Name is required',
                     v => (v && v.length <= 10) || 'Name must be less than 10 characters',
                 ],
-                email: [
-                    v => !!v || 'E-mail is required',
-                    v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-                ],
                 middlename: [
                     v => !!v || 'middlename is required'
                 ],
@@ -147,10 +141,8 @@ export default {
             return true;
         },
         async changeprofile() {
-            var hobbyStr = this.data.hobby.join(',');
             await this.$axios.put(`/api/change-profile`, {
                 name: this.me.name,
-                email: this.me.email,
                 middlename: this.me.middlename,
                 surname: this.me.surname,
                 address_line1: this.me.address_line1,
@@ -162,7 +154,7 @@ export default {
                 phone: this.me.phone,
                 birth_date: this.me.birth_date,
                 gender: this.me.gender,
-                hobby: hobbyStr,
+                hobby: this.me.hobby,
             }).then((r) => {
                 Swal.fire({
                     title: ' User Profile updated',
